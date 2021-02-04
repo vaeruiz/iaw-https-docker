@@ -19,3 +19,84 @@ Cuando termine este proceso, volvemos a la ventana de servicios y vamos a Mis do
 En la nueva página que se nos abre, deberemos de crear 2 registros DNS de tipo A que apunten a nuestra máquina de Amazon, en mi caso los registros han quedado de la siguiente manera.
 
 ![Imagen de demostracion 1](/capturas/captura1.png)
+
+## Trabajando con Docker y Docke-compose
+
+Actualizamos los repositorios del sistema e instalamos docker y docker-compose y lo configuramos igual que hemos hecho en prácticas anteriores.
+
+Cuando hayamos hecho este paso crearemos el archivo YML, este archivo consta de lo siguiente:
+
+    version: '3.4'
+
+    services:
+    mysql:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    ports: 
+      - 3306:3306
+    environment: 
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    volumes: 
+      - mysql_data:/var/lib/mysql
+    networks: 
+      - backend-network
+    restart: always
+  
+    phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - 8080:80
+    environment: 
+      - PMA_ARBITRARY=1
+    networks: 
+      - backend-network
+      - frontend-network
+    restart: always
+    depends_on: 
+      - mysql
+
+    prestashop:
+    image: prestashop/prestashop
+    environment: 
+      - DB_SERVER=mysql
+    volumes:
+      - prestashop_data:/var/www/html
+    networks: 
+      - backend-network
+      - frontend-network
+    restart: always
+    depends_on: 
+      - mysql
+
+    https-portal:
+    image: steveltn/https-portal:1
+    ports:
+      - 80:80
+      - 443:443
+    restart: always
+    environment:
+      DOMAINS: 'iaw-docker-rcap.tk -> http://prestashop:80'
+      STAGE: 'staging' # Don't use production until staging works
+      #STAGE: 'production' # Don't use production until staging works
+      # FORCE_RENEW: 'true'
+    networks:
+      - frontend-network
+
+    volumes:
+    mysql_data:
+    prestashop_data:
+
+    networks: 
+    backend-network:
+    frontend-network:
+
+El archivo estará disponible en el repositorio.
+
+Es importante que hasta que no tengamos claro que no tengamos nuestro contenedor listo para lanzarlo a Internet tenemos que utilizar el STAGE de pruebas denominado "staging", cuando tengamos claro que nuestra infraestructura está preparada, utilizaremos el stage "production".
+
+El archivo ,env con las variables correspondientes estará disponible en el repositorio.
+
+Teniendo todo listo lanzamos nuestra infraestructura con 
