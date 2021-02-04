@@ -93,10 +93,10 @@ Cuando hayamos hecho este paso crearemos el archivo YML, este archivo consta de 
     backend-network:
     frontend-network:
 
-El archivo estará disponible en el repositorio.
+El archivo .yml estará disponible en el repositorio.
 
 Es importante que hasta que no tengamos claro que no tengamos nuestro contenedor listo para lanzarlo a Internet tenemos que utilizar el STAGE de pruebas denominado "staging", cuando tengamos claro que nuestra infraestructura está preparada, utilizaremos el stage "production".
 
-El archivo ,env con las variables correspondientes estará disponible en el repositorio.
+El archivo .env con las variables correspondientes estará disponible en el repositorio.
 
 Teniendo todo listo lanzamos nuestra infraestructura con 
