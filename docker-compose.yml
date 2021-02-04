@@ -46,13 +46,15 @@ services:
   https-portal:
     image: steveltn/https-portal:1
     ports:
-      - 80:80
-      - 443:443
+      - '80:80'
+      - '443:443'
+    links:
+      - prestashop
     restart: always
     environment:
-      DOMAINS: 'iaw-docker-rcap.tk -> http://prestashop:80'
-      STAGE: 'staging' # Don't use production until staging works
-      #STAGE: 'production' # Don't use production until staging works
+      DOMAINS: 'rcap-iaw-contenedor.ml -> http://prestashop:80'
+      #STAGE: 'staging' # Don't use production until staging works
+      STAGE: 'production' # Don't use production until staging works
       # FORCE_RENEW: 'true'
     networks:
       - frontend-network
