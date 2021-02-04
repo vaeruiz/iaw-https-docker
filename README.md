@@ -95,8 +95,10 @@ Cuando hayamos hecho este paso crearemos el archivo YML, este archivo consta de 
 
 El archivo .yml estará disponible en el repositorio.
 
-Es importante que hasta que no tengamos claro que no tengamos nuestro contenedor listo para lanzarlo a Internet tenemos que utilizar el STAGE de pruebas denominado "staging", cuando tengamos claro que nuestra infraestructura está preparada, utilizaremos el stage "production".
+Es importante que hasta que no tengamos claro que no tengamos nuestro contenedor listo para lanzarlo a Internet tenemos que utilizar el STAGE de pruebas denominado "staging", cuando tengamos claro que nuestra infraestructura está preparada, utilizaremos el stage "production" podemos tener una única linea de STAGE, pero he preferido tener 2 e ir comentando el tipo de stage que no quiero utilizar.
 
 El archivo .env con las variables correspondientes estará disponible en el repositorio.
 
-Teniendo todo listo lanzamos nuestra infraestructura con 
+Antes de poner en funcionamiento todos los contenedores, tenemos que asegurarnos de que la linea DOMAINS del servicio HTTPS tiene nuestro dominio puesto.
+
+Teniendo todo listo lanzamos nuestra infraestructura con el comando docker-compose up -d
