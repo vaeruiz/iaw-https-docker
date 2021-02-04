@@ -104,4 +104,4 @@ El archivo .env con las variables correspondientes estará disponible en el repo
 
 Antes de poner en funcionamiento todos los contenedores, tenemos que asegurarnos de que la linea DOMAINS del servicio HTTPS tiene nuestro dominio puesto.
 
-Teniendo todo listo lanzamos nuestra infraestructura con el comando docker-compose up -d
+Teniendo todo listo lanzamos nuestra infraestructura con el comando docker-compose up -d.
