@@ -74,8 +74,8 @@ Cuando hayamos hecho este paso crearemos el archivo YML, este archivo consta de 
     https-portal:
     image: steveltn/https-portal:1
     ports:
-      - '80:80'
-      - '443:443'
+      - 80:80
+      - 443:443
     links:
       - prestashop
     restart: always
