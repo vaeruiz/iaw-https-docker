@@ -119,8 +119,8 @@ UPDATE ps_configuration SET value=1 WHERE name="PS_SSL_ENABLED_EVERYWHERE";
 
 Con estos cambios hechos si entramos a nuestro sitio web Prestashop podremos observar que ya es un sitio completamente seguro.
 
-*En cada aplicación web este proceso puede ser distinto*
+**En cada aplicación web este proceso puede ser distinto**
 
 ## Enlace a mi sitio prestashop
 
-- *[rcapsecuredocker.tk](https://rcapsecuredocker.tk)*
+- **[rcapsecuredocker.tk](https://rcapsecuredocker.tk)**
