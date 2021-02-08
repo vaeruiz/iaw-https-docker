@@ -107,3 +107,11 @@ Teniendo todo listo lanzamos nuestra infraestructura con el comando docker-compo
 Si entramos en el dominio podremos ver que tenemos nuestra aplicación web bajo una conexión SSL.
 
 ![Imagen de demostracion 2](/capturas/captura2.png)
+
+Cuando hayamos instalado nuestra aplicación web (en este caso Prestashop) cabe la posibilidad de que tengamos que activar el protocolo SSL desde el panel de administración, si no nos deja, podemos hacerlo modificando la base de datos. Vamos al PhpMyAdmin y ejecutamos las siguientes instrucciones en el apartado SQL o modificando los valores de forma gráfica.
+
+```
+UPDATE ps_configuration SET value=1 WHERE name="PS_SSL_ENABLED";
+
+UPDATE ps_configuration SET value=1 WHERE name="PS_SSL_ENABLED_EVERYWHERE";
+```
