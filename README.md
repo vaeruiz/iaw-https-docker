@@ -26,10 +26,11 @@ Actualizamos los repositorios del sistema e instalamos docker y docker-compose y
 
 Cuando hayamos hecho este paso crearemos el archivo YML, este archivo consta de lo siguiente:
 
-    version: '3.4'
+```
+version: '3.4'
 
-    services:
-    mysql:
+services:
+  mysql:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
     ports: 
@@ -45,7 +46,7 @@ Cuando hayamos hecho este paso crearemos el archivo YML, este archivo consta de 
       - backend-network
     restart: always
   
-    phpmyadmin:
+  phpmyadmin:
     image: phpmyadmin
     ports:
       - 8080:80
@@ -58,7 +59,7 @@ Cuando hayamos hecho este paso crearemos el archivo YML, este archivo consta de 
     depends_on: 
       - mysql
 
-    prestashop:
+  prestashop:
     image: prestashop/prestashop
     environment: 
       - DB_SERVER=mysql
@@ -71,34 +72,31 @@ Cuando hayamos hecho este paso crearemos el archivo YML, este archivo consta de 
     depends_on: 
       - mysql
 
-    https-portal:
+  https-portal:
     image: steveltn/https-portal:1
     ports:
       - 80:80
       - 443:443
-    links:
-      - prestashop
     restart: always
     environment:
-      DOMAINS: 'rcap-iaw-contenedor.ml -> http://prestashop:80'
-      #STAGE: 'staging' # Don't use production until staging works
-      STAGE: 'production' # Don't use production until staging works
+      DOMAINS: 'rcapsecuredocker.tk -> http://prestashop:80'
+      STAGE: 'staging' # Don't use production until staging works
       # FORCE_RENEW: 'true'
     networks:
       - frontend-network
 
-    volumes:
-    mysql_data:
-    prestashop_data:
+volumes:
+  mysql_data:
+  prestashop_data:
 
-    networks: 
-    backend-network:
-    frontend-network:
-
+networks: 
+  backend-network:
+  frontend-network:
+```
 
 El archivo .yml estará disponible en el repositorio.
 
-Es importante que hasta que no tengamos claro que no tengamos nuestro contenedor listo para lanzarlo a Internet tenemos que utilizar el STAGE de pruebas denominado "staging", cuando tengamos claro que nuestra infraestructura está preparada, utilizaremos el stage "production" podemos tener una única linea de STAGE, pero he preferido tener 2 e ir comentando el tipo de stage que no quiero utilizar.
+Es importante que hasta que no tengamos claro que no tengamos que nuestro contenedor está listo para lanzarlo de forma profesional a Internet tenemos que utilizar el STAGE de pruebas denominado "staging", cuando tengamos claro que nuestra infraestructura está preparada, utilizaremos el stage "production" podemos incluir en el yml varias lineas de STAGE comentadas de cada tipo, así solo tendremos que descomentar la que nos interese utilizar..
 
 El archivo .env con las variables correspondientes estará disponible en el repositorio.
 
