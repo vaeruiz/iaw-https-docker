@@ -80,7 +80,8 @@ services:
     restart: always
     environment:
       DOMAINS: 'rcapsecuredocker.tk -> http://prestashop:80'
-      STAGE: 'staging' # Don't use production until staging works
+      #STAGE 'production' # Utilizar cuando el sitio esté listo
+      STAGE: 'staging' # Utilizar para pruebas
       # FORCE_RENEW: 'true'
     networks:
       - frontend-network
