@@ -48,13 +48,10 @@ services:
     ports:
       - 80:80
       - 443:443
-    links:
-      - prestashop
     restart: always
     environment:
-      DOMAINS: 'rcap-iaw-contenedor.ml -> http://prestashop:80'
-      #STAGE: 'staging' # Don't use production until staging works
-      STAGE: 'production' # Don't use production until staging works
+      DOMAINS: 'rcapsecuredocker.tk -> http://prestashop:80'
+      STAGE: 'staging' # Don't use production until staging works
       # FORCE_RENEW: 'true'
     networks:
       - frontend-network
